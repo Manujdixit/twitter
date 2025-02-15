@@ -12,14 +12,17 @@ import {
 } from "@tabler/icons-react";
 import { Center, Stack, Tooltip, UnstyledButton } from "@mantine/core";
 import "../styles/tooltipnavbar.css";
+import { Link } from "react-router-dom";
 
-function NavbarLink({ icon: Icon, label, active, onClick }) {
+function NavbarLink({ icon: Icon, label, active, onClick, to }) {
   return (
     <Tooltip label={label} position="right" transitionProps={{ duration: 0 }}>
       <UnstyledButton
         onClick={onClick}
         className="link"
         data-active={active || undefined}
+        component={Link}
+        to={to}
       >
         <Icon size={20} stroke={1.5} />
       </UnstyledButton>
@@ -28,17 +31,17 @@ function NavbarLink({ icon: Icon, label, active, onClick }) {
 }
 
 const mockdata = [
-  { icon: IconHome2, label: "Home" },
-  { icon: IconGauge, label: "Dashboard" },
-  { icon: IconDeviceDesktopAnalytics, label: "Analytics" },
-  { icon: IconCalendarStats, label: "Releases" },
-  { icon: IconUser, label: "Account" },
-  { icon: IconFingerprint, label: "Security" },
-  { icon: IconSettings, label: "Settings" },
+  { icon: IconHome2, label: "Home", to: "/" },
+  { icon: IconGauge, label: "Dashboard", to: "/dashboard" },
+  { icon: IconDeviceDesktopAnalytics, label: "Analytics", to: "/analytics" },
+  { icon: IconCalendarStats, label: "Releases", to: "/releases" },
+  { icon: IconUser, label: "Account", to: "/account" },
+  { icon: IconFingerprint, label: "Security", to: "/security" },
+  { icon: IconSettings, label: "Settings", to: "/settings" },
 ];
 
-export function TooltipNavbar() {
-  const [active, setActive] = useState(2);
+export default function TooltipNavbar() {
+  const [active, setActive] = useState(0);
 
   const links = mockdata.map((link, index) => (
     <NavbarLink
@@ -62,8 +65,12 @@ export function TooltipNavbar() {
       </div>
 
       <Stack justify="center" gap={0}>
-        <NavbarLink icon={IconSwitchHorizontal} label="Change account" />
-        <NavbarLink icon={IconLogout} label="Logout" />
+        <NavbarLink
+          icon={IconSwitchHorizontal}
+          label="Change account"
+          to="/change-account"
+        />
+        <NavbarLink icon={IconLogout} label="Logout" to="/logout" />
       </Stack>
     </nav>
   );

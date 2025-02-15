@@ -10,11 +10,16 @@ import {
 import { useMediaQuery } from "@mantine/hooks";
 import { IconBrandGoogle } from "@tabler/icons-react";
 import { Apple } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function XLogin() {
   const theme = useMantineTheme();
+  const navigate = useNavigate();
 
-  // Responsive logo sizes
+  const onClick = () => {
+    navigate("/");
+  };
+
   const isXSmall = useMediaQuery("(max-width: 480px)");
   const isSmall = useMediaQuery("(max-width: 768px)");
   const isMedium = useMediaQuery("(max-width: 1024px)");
@@ -100,6 +105,7 @@ export default function XLogin() {
               mt="lg"
               radius="md"
               variant="default"
+              onClick={onClick}
             >
               Sign in with Google
             </Button>
@@ -109,13 +115,20 @@ export default function XLogin() {
               mt="sm"
               radius="md"
               variant="default"
+              onClick={onClick}
             >
               Sign up with Apple
             </Button>
 
             <Divider label="or" labelPosition="center" mt="md" />
 
-            <Button style={styles.button} mt="sm" radius="md" color="blue">
+            <Button
+              style={styles.button}
+              mt="sm"
+              radius="md"
+              color="blue"
+              onClick={onClick}
+            >
               Create account
             </Button>
 
@@ -128,9 +141,10 @@ export default function XLogin() {
               Already have an account?{" "}
               <Text
                 component="span"
-                color="blue"
+                c="blue"
                 weight={500}
                 style={styles.signInText}
+                onClick={onClick}
               >
                 Sign in
               </Text>
